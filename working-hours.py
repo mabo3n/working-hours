@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-SHEET_URL = r'https://docs.google.com/spreadsheets/d/<ID>/edit#gid=0'
+SHEET_URL = r'https://docs.google.com/spreadsheets/d/15rIW21lVrPTzAS1EcqPGDz1pPnCgMBZ2HVS-0iBtUFA/edit#gid=0'
 BUSINESS_DAY_DEFAULT_TARGET_HOURS = 8.5
 
 
@@ -52,7 +52,8 @@ performance.loc[performance.index.dayofweek<5,
 performance['target_working_hours'].update(target_hours_override)
 
 # Cumulative target working hours
-performance['cum_target_working_hours'] = performance['target_working_hours'].cumsum()
+performance['cum_target_working_hours'] = (
+        performance['target_working_hours'].apply(float).cumsum())
 
 # Working/target hours balance 
 balance = (performance['cum_working_hours'].tail(1)
